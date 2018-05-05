@@ -1,0 +1,14 @@
+{% extends 'wrapper.html' %}
+
+{% block content %}
+
+<ul id="navigation">
+  {% for href, caption in navigation %}
+  <li>
+    <a href="{{ href }}">{{ caption }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
+

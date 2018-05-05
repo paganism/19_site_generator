@@ -1,0 +1,53 @@
+{% extends 'wrapper.html' %}
+{% block content %}
+<section id="topics" class="topics">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="title">
+          <h2 class="title__main">
+            Энциклопедия
+          </h2>
+          <p class="title__text">
+            Знания, необходимые для старта. Коротко. Ясно. В сжатом виде.
+          </p>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        {% for topic in topics %}
+        <div class="col-lg-3">
+          <div class="title">
+            <h5 class="title__main">
+              {{ topic['title'] }}
+            </h5>
+            <ul class="title_text">
+              {% for article in articles %}
+                {% if article['topic'] == topic['slug'] %}
+              <li>
+                  <!--<a href="{{ article.source }}"></a>-->
+                  <a href="{{ article['source'].split('/')[1].replace('md', 'html') }}">
+                    {{ article['title'] }}
+                  </a>
+                  <!--{{ article.title }}-->
+                {% endif %}
+              {% endfor %}
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</section>
+<!--<ul id="navigation">-->
+  <!--{% for href, caption in navigation %}-->
+  <!--<li>-->
+    <!--<a href="{{ href }}">{{ caption }}</a>-->
+  <!--</li>-->
+  <!--{% endfor %}-->
+<!--</ul>-->
+
+{% endblock %}
+
