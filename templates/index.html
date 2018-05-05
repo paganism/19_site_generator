@@ -26,11 +26,9 @@
               {% for article in articles %}
                 {% if article['topic'] == topic['slug'] %}
               <li>
-                  <!--<a href="{{ article.source }}"></a>-->
                   <a href="{{ article['source'].split('/')[1].replace('md', 'html') }}">
                     {{ article['title'] }}
                   </a>
-                  <!--{{ article.title }}-->
                 {% endif %}
               {% endfor %}
               </li>
@@ -41,13 +39,5 @@
     </div>
   </div>
 </section>
-<!--<ul id="navigation">-->
-  <!--{% for href, caption in navigation %}-->
-  <!--<li>-->
-    <!--<a href="{{ href }}">{{ caption }}</a>-->
-  <!--</li>-->
-  <!--{% endfor %}-->
-<!--</ul>-->
-
 {% endblock %}
 
