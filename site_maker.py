@@ -5,7 +5,6 @@ from jinja2 import Environment, FileSystemLoader, Template, select_autoescape
 import os
 from livereload import Server
 
-
 env = Environment(loader=FileSystemLoader('./templates/'),
                   autoescape=True,
                   trim_blocks=False)
@@ -27,7 +26,7 @@ def create_encyclopedia_pages(config, env):
         html_file_name = (item['source'].split('/')[1].replace('md', 'html'))
         md_to_html = markdowh_to_html('articles/{}'.format(item['source']))
         template = env.get_template('page.html')
-        with open('./{}'.format(html_file_name),
+        with open('site/{}'.format(html_file_name),
                   'w',
                   encoding='utf-8'
                   ) as html_file:
@@ -47,26 +46,19 @@ def get_data_from_config(config):
 def make_site():
     config = read_config()
     en_names = get_data_from_config(config)
+    create_encyclopedia_pages(config, env)
     template = env.get_template('index.html')
-    with open('index.html', 'w', encoding='utf-8') as file:
+    with open('site/index.html', 'w', encoding='utf-8') as file:
         file.write(template.render(navigation=en_names,
                                    topics=config['topics'],
                                    articles=config['articles'])
                    )
-    create_encyclopedia_pages(config, env)
 
 
 if __name__ == '__main__':
     config = read_config()
-    # en_names = get_data_from_config(config)
-    #create_encyclopedia_pages(config, env)
     make_site()
     server = Server()
     server.watch('articles/', make_site)
     server.watch('templates/', make_site)
-    server.serve(root='./', debug=True)
-    # for article in config['articles']:
-    #     #print(article['source'])
-    #     server.watch('articles/{}'.format(article['source']), make_site)
-    # #server.watch('./templates/', make_site(en_names, config, env))
-    #     server.serve(root='site/', debug=True)  # folder to serve html files from
+    server.serve(root='site/', debug=True)
