@@ -2,6 +2,8 @@
 
 This module converts all md files to html and generates a site.
 
+link to site https://paganism.github.io/19_site_generator/static/index.html
+
 # Install Requirements
 ```
 $ pip3 install -r requirements.txt
