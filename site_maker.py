@@ -26,7 +26,7 @@ def create_encyclopedia_pages(config, env):
         html_file_name = (item['source'].split('/')[1].replace('md', 'html'))
         md_to_html = markdowh_to_html('articles/{}'.format(item['source']))
         template = env.get_template('page.html')
-        with open('site/{}'.format(html_file_name),
+        with open('static/{}'.format(html_file_name),
                   'w',
                   encoding='utf-8'
                   ) as html_file:
@@ -48,7 +48,7 @@ def make_site():
     en_names = get_data_from_config(config)
     create_encyclopedia_pages(config, env)
     template = env.get_template('index.html')
-    with open('site/index.html', 'w', encoding='utf-8') as file:
+    with open('static/index.html', 'w', encoding='utf-8') as file:
         file.write(template.render(navigation=en_names,
                                    topics=config['topics'],
                                    articles=config['articles'])
@@ -61,4 +61,4 @@ if __name__ == '__main__':
     server = Server()
     server.watch('articles/', make_site)
     server.watch('templates/', make_site)
-    server.serve(root='site/', debug=True)
+    server.serve(root='static/', debug=True)
