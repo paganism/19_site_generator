@@ -9,7 +9,7 @@ env = Environment(loader=FileSystemLoader('./templates/'),
                   trim_blocks=False)
 
 
-def markdowh_to_html(mdfile):
+def markdown_to_html(mdfile):
     with open(mdfile, 'r', encoding='utf-8') as md_file:
         html = markdown.markdown(md_file.read(), extension='codehilite')
         return html
@@ -23,7 +23,7 @@ def read_config():
 def create_encyclopedia_pages(config, env):
     for article in config['articles']:
         html_file_name = (article['source'].split('/')[1].replace('md', 'html'))
-        md_to_html = markdowh_to_html('articles/{}'.format(article['source']))
+        md_to_html = markdown_to_html(os.path.join('articles/', article['source']))
         template = env.get_template('page.html')
         with open('static/{}'.format(html_file_name),
                   'w',
