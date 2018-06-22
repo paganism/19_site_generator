@@ -20,9 +20,13 @@ def read_config():
         return json.loads(file.read())
 
 
+def get_splitted_names(name):
+    return name.split('/')[1].replace('md', 'html')
+
+
 def create_encyclopedia_pages(config, env):
     for article in config['articles']:
-        html_file_name = (article['source'].split('/')[1].replace('md', 'html'))
+        html_file_name = get_splitted_names(article['source'])
         md_to_html = markdown_to_html(os.path.join('articles/', article['source']))
         template = env.get_template('page.html')
         with open('static/{}'.format(html_file_name),
@@ -37,7 +41,7 @@ def create_encyclopedia_pages(config, env):
 def get_data_from_config(config):
     en_names = []
     for article in config['articles']:
-        en_names.append((article['source'].split('/')[1].replace('md', 'html'),
+        en_names.append((get_splitted_names(article['source']),
                          article['title']))
     return en_names
 
