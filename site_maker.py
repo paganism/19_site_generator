@@ -21,9 +21,9 @@ def read_config():
 
 
 def create_encyclopedia_pages(config, env):
-    for item in config['articles']:
-        html_file_name = (item['source'].split('/')[1].replace('md', 'html'))
-        md_to_html = markdowh_to_html('articles/{}'.format(item['source']))
+    for article in config['articles']:
+        html_file_name = (article['source'].split('/')[1].replace('md', 'html'))
+        md_to_html = markdowh_to_html('articles/{}'.format(article['source']))
         template = env.get_template('page.html')
         with open('static/{}'.format(html_file_name),
                   'w',
@@ -31,7 +31,7 @@ def create_encyclopedia_pages(config, env):
                   ) as html_file:
             html_file.write(template.render(
                 md_to_html=md_to_html,
-                title=item['title']))
+                title=article['title']))
 
 
 def get_data_from_config(config):
