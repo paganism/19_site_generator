@@ -20,8 +20,8 @@ def read_config():
         return json.loads(file.read())
 
 
-def get_splitted_names(name):
-    return name.split('/')[1].replace('md', 'html')
+def get_splitted_names(full_path_name):
+    return full_path_name.split('/')[1].replace('md', 'html')
 
 
 def create_encyclopedia_pages(config, env):
