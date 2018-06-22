@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import markdown
 import json
 from jinja2 import Environment, FileSystemLoader, Template, select_autoescape
